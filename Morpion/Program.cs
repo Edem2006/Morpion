@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 
@@ -7,12 +10,29 @@ namespace Morpion
     class Program
     {
         public static int[,] grille = new int[3, 3]; // matrice pour stocker les coups joués
-
         // Fonction permettant l'affichage du Morpion
+        
         public static void AfficherMorpion(int j, int k)
         {
             // A compléter 
+            for (  j = 0; j < grille.GetLength(0); j++)
+            {
+                Console.Write("\n|====|====|====|\n");
+                Console.Write("|");
+                for ( k = 0; k < grille.GetLength(1); k++)
+                {
+                    Console.Write(" -- ");
+                    Console.Write("|");
+                }
+
+
+
+            }
+            Console.Write("\n|====|====|====|\n");
+
+            Console.ReadKey();
         }
+        
 
         // Fonction permettant de changer
         // dans le tableau qu'elle est le 
@@ -20,9 +40,18 @@ namespace Morpion
         // Bien vérifier que le joueur ne sort
         // pas du tableau et que la position
         // n'est pas déjà jouée
+        
         public static bool AJouer(int j, int k, int joueur)
         {
             // A compléter 
+           if ( j != 3 && k != 3 || j == 3 && k != 3 || j != 3 && k == 3)
+            {
+                for (j = 1, k = 1; j <= grille.GetLength(0) && k <= grille.GetLength(1); j++, k++)
+                    
+                return true;
+               
+
+            }
             return false;
         }
 
@@ -37,6 +66,7 @@ namespace Morpion
         // Programme principal
         static void Main(string[] args)
         {
+            
             //--- Déclarations et initialisations --
             int LigneDébut = Console.CursorTop;     // par rapport au sommet de la fenêtre
             int ColonneDébut = Console.CursorLeft; // par rapport au sommet de la fenêtre
@@ -55,7 +85,7 @@ namespace Morpion
 			        grille[j,k] = 10;
             while(!gagner && essais != 9)
             {
-
+                AfficherMorpion(j, k);
                 // A compléter 
                 try
                 {
